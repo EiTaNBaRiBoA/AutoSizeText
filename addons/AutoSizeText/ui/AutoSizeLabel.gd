@@ -11,7 +11,7 @@ var refresh_button = do_resize_text.bind()
 
 var _min_font_size: int = 8
 @export
-var min_font_size: int:
+var min_font_size: int = _min_font_size:
 	get:
 		return _min_font_size
 	set(value):
@@ -28,7 +28,7 @@ var min_font_size: int:
 
 var _max_font_size: int = 38
 @export
-var max_font_size: int:
+var max_font_size: int = _max_font_size:
 	get:
 		return _max_font_size
 	set(value):
@@ -44,35 +44,41 @@ var max_font_size: int:
 		resize_text()
 
 
-var font_size: int = 0
-
 func _ready() -> void:
-	autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	clip_text = true
-	text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	# TODO: change defaults instead of hard-setting!
 	
-	font_size = min_font_size
+	if autowrap_mode == TextServer.AUTOWRAP_OFF:
+		autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		push_warning("changed autowrap_mode to " + str(autowrap_mode))
+
+	if text_overrun_behavior == TextServer.AUTOWRAP_OFF:
+		text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		push_warning("changed text_overrun_behavior to " + str(text_overrun_behavior))
+		
+	clip_text = true
+	
 	draw.connect(resize_text)
 	resized.connect(do_resize_text)
 	do_resize_text()
+
 
 func resize_text() -> void:
 	if not needs_resize():
 		return
 		
 	do_resize_text()
-	
+
+
 func do_resize_text():
-	print("do_resize_text")
 	for i in range(max_font_size, min_font_size, -1):
 		set("theme_override_font_sizes/font_size", i)
-		#emit_signal("item_rect_changed")
 
-		custom_minimum_size = Vector2(0, 1)
+		# force a refresh before checking needs_resize
+		custom_minimum_size = Vector2(custom_minimum_size.x, custom_minimum_size.y)
+		
 		if not needs_resize():
-			font_size = i
-			print("font_size: " + str(font_size))
 			break
-	
+
+
 func needs_resize() -> bool:
 	return get_line_count() > get_visible_line_count()
