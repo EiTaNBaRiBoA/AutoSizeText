@@ -29,7 +29,7 @@ custom_minimum_size = Vector2(0, 1)
 offset_left = 576.0
 offset_top = 64.0
 offset_right = 1096.0
-offset_bottom = 264.0
+offset_bottom = 256.0
 theme_override_font_sizes/font_size = 21
 text = "ARBITRARY
 Play alone, with friends in private rooms or join a faction and play online with the whole world in this epic MMORPG.
