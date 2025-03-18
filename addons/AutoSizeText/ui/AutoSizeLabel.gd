@@ -43,6 +43,23 @@ var max_font_size: int = _max_font_size:
 		notify_property_list_changed()
 		resize_text()
 
+@export_group("Step Size")
+
+var _step_sizes: Array[int] = []
+## Needs 2 numbers to work / will be automatically prefered over "Auto-Size"[br]
+## when 2 numbers or more are present.
+@export
+var step_sizes: Array = _step_sizes:
+	get:
+		return _step_sizes
+	set(value):
+		_step_sizes = value
+		_step_sizes.sort()
+		
+		notify_property_list_changed()
+		resize_text()
+
+
 var _processing_flag: bool = false
 
 
@@ -77,8 +94,8 @@ func do_resize_text() -> void:
 		return 
 	
 	_processing_flag = true
-	for i: int in range(max_font_size, min_font_size, -1):
-		set(&"theme_override_font_sizes/font_size", i)
+	for target_font_size: int in get_iterator():
+		set(&"theme_override_font_sizes/font_size", target_font_size)
 
 		# force a refresh before checking needs_resize
 		custom_minimum_size = Vector2(custom_minimum_size.x, custom_minimum_size.y)
@@ -87,6 +104,18 @@ func do_resize_text() -> void:
 			break
 	
 	_processing_flag = false
+
+
+func get_iterator() -> Array:
+	if len(step_sizes) >= 2:
+		var clone: Array[int] = step_sizes.duplicate()
+		clone.reverse()
+		return clone
+	
+	if len(step_sizes) == 1:
+		push_warning(name + " Step sizes needs at least 2 numbers to work")
+	
+	return range(max_font_size, min_font_size, -1)
 
 
 func needs_resize() -> bool:
