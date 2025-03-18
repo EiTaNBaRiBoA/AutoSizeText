@@ -43,7 +43,7 @@ var max_font_size: int = _max_font_size:
 		notify_property_list_changed()
 		resize_text()
 
-var _processing_flag : bool = false
+var _processing_flag: bool = false
 
 func _ready() -> void:
 	# TODO: change defaults instead of hard-setting!
@@ -71,7 +71,10 @@ func resize_text() -> void:
 
 
 func do_resize_text() -> void:
-	if _processing_flag:return # Prevent draw call stack handler
+	# Prevent draw call stack handler
+	if _processing_flag:
+		return 
+	
 	_processing_flag = true
 	for i : int in range(max_font_size, min_font_size, -1):
 		set(&"theme_override_font_sizes/font_size", i)
@@ -81,6 +84,7 @@ func do_resize_text() -> void:
 
 		if not needs_resize():
 			break
+	
 	_processing_flag = false
 
 func needs_resize() -> bool:

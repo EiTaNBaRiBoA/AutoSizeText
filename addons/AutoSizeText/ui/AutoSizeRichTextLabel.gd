@@ -10,7 +10,7 @@ class_name AutoSizeRichTextLabel
 @export_group("Inspector Buttons")
 
 @export_tool_button("FORCE REFRESH")
-var refresh_button : Callable = do_resize_text
+var refresh_button: Callable = do_resize_text
 
 @export_group("Auto-Size")
 
