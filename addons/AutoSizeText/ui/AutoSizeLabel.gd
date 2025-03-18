@@ -49,7 +49,7 @@ var _step_sizes: Array[int] = []
 ## Needs 2 numbers to work / will be automatically prefered over "Auto-Size"[br]
 ## when 2 numbers or more are present.
 @export
-var step_sizes: Array = _step_sizes:
+var step_sizes: Array[int] = _step_sizes:
 	get:
 		return _step_sizes
 	set(value):
