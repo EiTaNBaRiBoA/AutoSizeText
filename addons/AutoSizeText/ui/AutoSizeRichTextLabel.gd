@@ -98,6 +98,7 @@ func do_resize_text() -> void:
 		push_warning("Fit content can't be used (program freeze), setting it to false!")
 		fit_content = false
 	
+	# TODO: I don't like changing the original text, needs investigating.
 	if !text.begins_with("[font_size="):
 		set(&"text", "[font_size={0}]{1}[/font_size]".format([max_font_size, text]))
 	else:
