@@ -88,10 +88,11 @@ func do_resize_text() -> void:
 		set(&"text", "[font_size={0}]{1}".format([max_font_size, text.substr(text.find("]", 0) + 1, -1)]))
 	
 	_processing_flag = false
-	reisze_text.call_deferred()
+	# TODO: Why do we need deferred here?
+	_do_resize_text.call_deferred()
 
 
-func reisze_text() -> void:
+func _do_resize_text() -> void:
 	var font_size : int = 0
 	for i : int in range(max_font_size, min_font_size, -1):
 		font_size = i
