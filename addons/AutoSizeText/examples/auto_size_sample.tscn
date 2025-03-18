@@ -42,7 +42,7 @@ min_font_size = 8
 max_font_size = 38
 metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
-[node name="AutoSizeLabelWordSmart2" type="Label" parent="CanvasLayer"]
+[node name="AutoSizeLabelWord" type="Label" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 1)
 offset_left = 56.0
 offset_top = 256.0

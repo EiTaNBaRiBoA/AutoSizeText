@@ -50,6 +50,7 @@ var max_font_size: int = _max_font_size:
 
 var _processing_flag : bool = false
 
+
 func _ready() -> void:
 	# TODO: change defaults instead of hard-setting!
 
@@ -69,28 +70,41 @@ func resize_text() -> void:
 
 	do_resize_text()
 
+
 func do_resize_text() -> void:
-	if _processing_flag:return # Prevent draw call stack handler
+	# Prevent draw call stack handler
+	if _processing_flag:
+		return 
+	
 	_processing_flag = true
+	
+	if fit_content:
+		push_warning("Fit content can't be used (program freeze), setting it to false!")
+		fit_content = false
+	
 	if !text.begins_with("[font_size="):
 		set(&"text", "[font_size={0}]{1}[/font_size]".format([max_font_size, text]))
 	else:
 		set(&"text", "[font_size={0}]{1}".format([max_font_size, text.substr(text.find("]", 0) + 1, -1)]))
+	
 	_processing_flag = false
 	reisze_text.call_deferred()
 
+
 func reisze_text() -> void:
-	var fsize : int = 0
+	var font_size : int = 0
 	for i : int in range(max_font_size, min_font_size, -1):
-		fsize = i
-		set(&"text", "[font_size={0}]{1}".format([fsize, text.substr(text.find("]", 0) + 1, -1)]))
+		font_size = i
+		set(&"text", "[font_size={0}]{1}".format([font_size, text.substr(text.find("]", 0) + 1, -1)]))
 
 		if not visible_lines(i):
 			break
 
+
 func visible_lines(char_size : float) -> bool:
 	char_size = (maxf(char_size,0.01) / 12.0) * 16.0
 	return get_line_count() > int(maxf(size.y, 0.01) / (char_size))
+
 
 func needs_resize() -> bool:
 	return (get_line_count() > get_visible_line_count())

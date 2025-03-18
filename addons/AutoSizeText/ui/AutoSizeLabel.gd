@@ -10,7 +10,7 @@ var refresh_button : Callable = do_resize_text
 @export_group("Auto-Size")
 
 var _min_font_size: int = 8
-@export
+@export_range(1, 512, 1.0)
 var min_font_size: int = _min_font_size:
 	get:
 		return _min_font_size
@@ -27,7 +27,7 @@ var min_font_size: int = _min_font_size:
 		resize_text()
 
 var _max_font_size: int = 38
-@export
+@export_range(1, 512, 1.0)
 var max_font_size: int = _max_font_size:
 	get:
 		return _max_font_size
@@ -44,6 +44,7 @@ var max_font_size: int = _max_font_size:
 		resize_text()
 
 var _processing_flag: bool = false
+
 
 func _ready() -> void:
 	# TODO: change defaults instead of hard-setting!
@@ -76,7 +77,7 @@ func do_resize_text() -> void:
 		return 
 	
 	_processing_flag = true
-	for i : int in range(max_font_size, min_font_size, -1):
+	for i: int in range(max_font_size, min_font_size, -1):
 		set(&"theme_override_font_sizes/font_size", i)
 
 		# force a refresh before checking needs_resize
@@ -86,6 +87,7 @@ func do_resize_text() -> void:
 			break
 	
 	_processing_flag = false
+
 
 func needs_resize() -> bool:
 	return get_line_count() > get_visible_line_count()
