@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0m8umaoobnpp"]
 
-[ext_resource type="Script" uid="uid://d11kfgsd6jgt" path="res://addons/AutoSizeText/ui/AutoSizeLabel.gd" id="1_2j4o3"]
+[ext_resource type="Script" uid="uid://d11kfgsd6jgt" path="res://addons/AutoSizeText/ui/AutoSizeLabel.gd" id="1_flqcm"]
 
 [node name="AutoSizeSample" type="Node2D"]
 
@@ -17,7 +17,7 @@ text = "Just change the size of these labels and see how they work."
 autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 3
-script = ExtResource("1_2j4o3")
+script = ExtResource("1_flqcm")
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -36,7 +36,7 @@ https://spielmannspiel.com/light-switch-simulator"
 autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 3
-script = ExtResource("1_2j4o3")
+script = ExtResource("1_flqcm")
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -55,7 +55,7 @@ https://spielmannspiel.com/light-switch-simulator"
 autowrap_mode = 1
 clip_text = true
 text_overrun_behavior = 3
-script = ExtResource("1_2j4o3")
+script = ExtResource("1_flqcm")
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -74,7 +74,7 @@ https://spielmannspiel.com/light-switch-simulator"
 autowrap_mode = 2
 clip_text = true
 text_overrun_behavior = 3
-script = ExtResource("1_2j4o3")
+script = ExtResource("1_flqcm")
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -93,7 +93,7 @@ https://spielmannspiel.com/light-switch-simulator"
 autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 3
-script = ExtResource("1_2j4o3")
+script = ExtResource("1_flqcm")
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -112,7 +112,7 @@ https://spielmannspiel.com/light-switch-simulator"
 autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 3
-script = ExtResource("1_2j4o3")
+script = ExtResource("1_flqcm")
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([8, 10, 20, 30])
