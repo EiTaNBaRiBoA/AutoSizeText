@@ -2,10 +2,19 @@
 extends Label
 class_name AutoSizeLabel
 
+
+## watch_text_change true is needed for this event to work
+signal text_changed(old_text: String, new_text: String)
+
+## When true, text-size will be re-calculated when the text is changed.[br]
+## Needed for the text_changed event to work.
+@export
+var watch_text_change: bool = false
+
 @export_group("Inspector Buttons")
 
 @export_tool_button("FORCE REFRESH")
-var refresh_button : Callable = do_resize_text
+var refresh_button: Callable = do_resize_text
 
 @export_group("Auto-Size")
 
@@ -61,6 +70,7 @@ var step_sizes: Array[int] = _step_sizes:
 
 
 var _processing_flag: bool = false
+var _last_text: String = ""
 
 
 func _ready() -> void:
@@ -75,10 +85,21 @@ func _ready() -> void:
 		push_warning("changed text_overrun_behavior to " + str(text_overrun_behavior))
 
 	clip_text = true
-
+	
 	draw.connect(resize_text)
 	resized.connect(do_resize_text)
 	do_resize_text()
+
+
+func _process(delta: float) -> void:
+	if watch_text_change:
+		if text != _last_text:
+			do_resize_text()
+			
+			if not Engine.is_editor_hint():
+				text_changed.emit(_last_text, text)
+				
+			_last_text = text
 
 
 func resize_text() -> void:
