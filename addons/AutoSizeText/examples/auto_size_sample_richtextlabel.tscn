@@ -15,6 +15,7 @@ grow_horizontal = 2
 bbcode_enabled = true
 text = "[font_size=38][fade start=20 length=50]Just change the size of these labels and see how they work.[/fade].[/font_size]"
 script = ExtResource("1_fkxwj")
+watch_text_change = null
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -32,6 +33,7 @@ Play alone, with friends in private rooms or join a faction and play online with
 https://spielmannspiel.com/light-switch-simulator[/pulse][/font_size]"
 scroll_active = false
 script = ExtResource("1_fkxwj")
+watch_text_change = null
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -49,6 +51,7 @@ Play alone, with friends in private rooms or join a faction and play online with
 https://spielmannspiel.com/light-switch-simulator[/rainbow].[/font_size]"
 autowrap_mode = 1
 script = ExtResource("1_fkxwj")
+watch_text_change = null
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -67,6 +70,7 @@ https://spielmannspiel.com/light-switch-simulator[/shake].[/font_size]"
 scroll_active = false
 autowrap_mode = 2
 script = ExtResource("1_fkxwj")
+watch_text_change = null
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -84,6 +88,7 @@ Play alone, with friends in private rooms or join a faction and play online with
 https://spielmannspiel.com/light-switch-simulator[/tornado][/font_size]"
 scroll_active = false
 script = ExtResource("1_fkxwj")
+watch_text_change = null
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([])
@@ -101,6 +106,7 @@ Play alone, with friends in private rooms or join a faction and play online with
 https://spielmannspiel.com/light-switch-simulator[/pulse][/font_size]"
 scroll_active = false
 script = ExtResource("1_fkxwj")
+watch_text_change = null
 min_font_size = 8
 max_font_size = 38
 step_sizes = Array[int]([8, 10, 20, 30])
