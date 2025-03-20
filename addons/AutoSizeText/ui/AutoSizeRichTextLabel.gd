@@ -15,8 +15,6 @@ signal text_changed(old_text: String, new_text: String)
 @export
 var watch_text_change: bool = false
 
-@export_group("Inspector Buttons")
-
 @export_tool_button("FORCE REFRESH")
 var refresh_button: Callable = do_resize_text
 
