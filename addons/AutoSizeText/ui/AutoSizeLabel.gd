@@ -2,7 +2,6 @@
 extends Label
 class_name AutoSizeLabel
 
-
 ## watch_text_change true is needed for this event to work
 signal text_changed(old_text: String, new_text: String)
 

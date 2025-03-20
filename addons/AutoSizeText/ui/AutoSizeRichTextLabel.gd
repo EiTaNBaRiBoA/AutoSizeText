@@ -7,6 +7,14 @@
 extends RichTextLabel
 class_name AutoSizeRichTextLabel
 
+## watch_text_change true is needed for this event to work
+signal text_changed(old_text: String, new_text: String)
+
+## When true, text-size will be re-calculated when the text is changed.[br]
+## Needed for the text_changed event to work.
+@export
+var watch_text_change: bool = false
+
 @export_group("Inspector Buttons")
 
 @export_tool_button("FORCE REFRESH")
@@ -65,6 +73,7 @@ var step_sizes: Array[int] = _step_sizes:
 		resize_text()
 
 var _processing_flag : bool = false
+var _last_text: String = ""
 
 
 func _ready() -> void:
@@ -78,6 +87,20 @@ func _ready() -> void:
 
 	resized.connect(do_resize_text)
 	do_resize_text()
+
+
+func _process(delta: float) -> void:
+	if watch_text_change:
+		if text != _last_text:
+			print(Time.get_datetime_string_from_system())
+			print(text + "\n#####\n" + _last_text)
+			
+			do_resize_text()
+			
+			if not Engine.is_editor_hint():
+				text_changed.emit(_last_text, text)
+			
+			_last_text = text
 
 
 func resize_text() -> void:
@@ -104,7 +127,7 @@ func do_resize_text() -> void:
 	else:
 		set(&"text", "[font_size={0}]{1}".format([max_font_size, text.substr(text.find("]", 0) + 1, -1)]))
 	
-	_processing_flag = false
+	
 	# TODO: Why do we need deferred here?
 	_do_resize_text.call_deferred()
 
@@ -115,7 +138,8 @@ func _do_resize_text() -> void:
 
 		if not visible_lines(target_font_size):
 			break
-
+	
+	_processing_flag = false
 
 func visible_lines(char_size : float) -> bool:
 	char_size = (maxf(char_size,0.01) / 12.0) * 16.0
