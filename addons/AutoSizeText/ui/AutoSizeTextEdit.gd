@@ -1,10 +1,11 @@
 @tool
-extends TextEdit
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Twister
 #
 # AutoSize TextEdit.
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
+class_name AutoSizeTextEdit extends TextEdit
+
 @export_category("Auto Size TextEdit")
 @export_tool_button("FORCE REFRESH")
 var refresh_button: Callable = _on_change_rect

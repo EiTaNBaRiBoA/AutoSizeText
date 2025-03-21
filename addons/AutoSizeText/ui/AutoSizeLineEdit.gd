@@ -1,10 +1,10 @@
 @tool
-extends LineEdit
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Twister
 #
 # AutoSize LineEdit.
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
+class_name AutoSizeLineEdit extends LineEdit
 
 @export_category("Auto Size LineText")
 @export_tool_button("FORCE REFRESH")
