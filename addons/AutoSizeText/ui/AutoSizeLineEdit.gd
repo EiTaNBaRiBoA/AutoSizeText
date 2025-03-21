@@ -11,12 +11,14 @@ extends LineEdit
 var refresh_button: Callable = _on_change_rect
 
 @export_group("Font Size")
+## Max text size to reach
 @export_range(1, 512) var max_size : int = 38:
 	set(new_max):
 		max_size = max(min_size, min(new_max,512))
 		if is_node_ready():
 			_on_change_rect()
 
+## Min text size to reach
 @export_range(1, 512) var min_size : int = 8:
 	set(new_min):
 		min_size = min(max(1, new_min), max_size)
