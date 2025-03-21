@@ -7,6 +7,8 @@ extends LineEdit
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 @export_category("Auto Size LineText")
+@export_tool_button("FORCE REFRESH")
+var refresh_button: Callable = _on_change_rect
 
 @export_group("Font Size")
 @export_range(1, 512) var max_size : int = 38:
@@ -21,6 +23,8 @@ extends LineEdit
 		if is_node_ready():
 			_on_change_rect()
 
+var _processing_flag : bool = false
+
 func _set(property: StringName, _value: Variant) -> bool:
 	if property == &"text" or \
 	property == &"right_icon" or \
@@ -31,8 +35,11 @@ func _set(property: StringName, _value: Variant) -> bool:
 
 func _ready() -> void:
 	item_rect_changed.connect(_on_change_rect)
+	_on_change_rect.call_deferred()
 
 func _on_change_rect() -> void:
+	if _processing_flag:return
+	_processing_flag = true
 	const OFFSET_BY : String = "_" #Taking custom char offset prevent text clip by rect
 	var font : Font = get(&"theme_override_fonts/font")
 	var c_size : int = max_size
@@ -67,12 +74,15 @@ func _on_change_rect() -> void:
 
 	offset = (font.get_string_size(OFFSET_BY, alignment, -1, c_size, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL)).x
 	while size.x - offset < fsize.x:
-		c_size = max(1, c_size - 1)
+		c_size = c_size - 1
 
-		if c_size < min_size:break
+		if c_size < min_size:
+			c_size = min_size
+			break
 
 		fsize = (font.get_string_size(current_text, alignment, -1, c_size , TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL))
 		fsize.x += right_icon_size
 		offset = (font.get_string_size(OFFSET_BY, alignment, -1, c_size, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL)).x
 
 	set(&"theme_override_font_sizes/font_size", c_size)
+	set_deferred(&"_processing_flag", false)

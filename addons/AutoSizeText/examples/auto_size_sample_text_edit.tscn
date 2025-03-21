@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbi7jiche7t5l"]
+
+[ext_resource type="Script" uid="uid://bcnnyihcec1gv" path="res://addons/AutoSizeText/ui/AutoSizeTextEdit.gd" id="1_43qmb"]
+
+[node name="AutoSizeSampleTextEdit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 45.0
+offset_right = 7.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "SAMPLE OF [TextEdit]"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 751.0
+offset_top = 53.0
+offset_right = 1158.0
+offset_bottom = 398.0
+theme_override_font_sizes/font_size = 9
+text = "A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A"
+script = ExtResource("1_43qmb")
+max_size = 90
+min_size = 1
+
+[node name="TextEdit2" type="TextEdit" parent="."]
+layout_mode = 0
+offset_top = 49.0
+offset_right = 576.0
+offset_bottom = 113.0
+theme_override_font_sizes/font_size = 10
+text = "WORD SMART
+Play alone, with friends in private rooms or join a faction and play online with the whole world in this epic MMORPG.
+https://spielmannspiel.com/light-switch-simulator"
+script = ExtResource("1_43qmb")
+min_size = 1
+
+[node name="TextEdit3" type="TextEdit" parent="."]
+layout_mode = 0
+offset_top = 141.0
+offset_right = 576.0
+offset_bottom = 351.0
+theme_override_font_sizes/font_size = 8
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet justo ac metus ultrices, malesuada commodo purus faucibus.
+Nunc finibus, sem et hendrerit congue, mi risus sollicitudin diam, a elementum leo quam sit amet nibh. Nunc ut ullamcorper ligula. Etiam
+finibus, neque et venenatis efficitur, nulla velit condimentum nunc, non iaculis lectus dolor ut nunc. Phasellus feugiat tortor dolor, non
+mattis neque semper nec. Aliquam sit amet est in massa pulvinar malesuada. Proin efficitur, lectus eu sagittis aliquam, dui magna
+scelerisque mauris, vitae consequat velit elit ut neque. Curabitur porttitor lacus metus, ut porttitor urna pellentesque eget. Integer
+accumsan quis nunc eget commodo. Nunc a tristique lectus. In lobortis ligula a lobortis aliquam. Pellentesque nulla  ipsum, consectetur vel
+libero a, lobortis cursus velit. Suspendisse potenti. Phasellus tempus blandit dui.
+Nunc sed imperdiet turpis. Integer vitae orci quis turpis condimentum sollicitudin vitae vitae ante. Aliquam faucibus quam in felis laoreet
+sollicitudin eget ut urna. Nullam viverra neque eu magna finibus, quis congue dolor tempus. Suspendisse eu euismod tortor. Fusce id nunc
+nunc. Pellentesque suscipit tortor a quam pellentesque, ut tempus arcu eleifend. Aenean in pharetra nibh. Praesent vitae sagittis sapien.
+Donec ornare sapien vel sem condimentum, dignissim suscipit augue maximus. Duis interdum velit elit. Proin scelerisque dignissim
+pellentesque. Vivamus a ornare erat, id ullamcorper leo. Fusce dignissim dignissim pharetra. Nulla iaculis, quam in tempor dapibus, purus..."
+script = ExtResource("1_43qmb")
+min_size = 1
+
+[node name="TextEdit4" type="TextEdit" parent="."]
+layout_mode = 0
+offset_top = 390.0
+offset_right = 576.0
+offset_bottom = 603.0
+theme_override_font_sizes/font_size = 8
+placeholder_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet justo ac metus ultrices, malesuada commodo purus faucibus.
+Nunc finibus, sem et hendrerit congue, mi risus sollicitudin diam, a elementum leo quam sit amet nibh. Nunc ut ullamcorper ligula. Etiam
+finibus, neque et venenatis efficitur, nulla velit condimentum nunc, non iaculis lectus dolor ut nunc. Phasellus feugiat tortor dolor, non
+mattis neque semper nec. Aliquam sit amet est in massa pulvinar malesuada. Proin efficitur, lectus eu sagittis aliquam, dui magna
+scelerisque mauris, vitae consequat velit elit ut neque. Curabitur porttitor lacus metus, ut porttitor urna pellentesque eget. Integer
+accumsan quis nunc eget commodo. Nunc a tristique lectus. In lobortis ligula a lobortis aliquam. Pellentesque nulla  ipsum, consectetur vel
+libero a, lobortis cursus velit. Suspendisse potenti. Phasellus tempus blandit dui."
+script = ExtResource("1_43qmb")
+min_size = 1
