@@ -6,7 +6,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 class_name AutoSizeLineEdit extends LineEdit
 
-@export_category("Auto Size LineText")
+@export_category("Auto Size LineEdit")
 @export_tool_button("FORCE REFRESH")
 var refresh_button: Callable = _on_change_rect
 
