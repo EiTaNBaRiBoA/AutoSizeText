@@ -119,7 +119,6 @@ func _force_update() -> void:
 
 func _ready() -> void:
 	item_rect_changed.connect(_force_update)
-	#_on_change_rect.call_deferred()
 	_force_update.call_deferred()
 
 func _on_change_rect() -> void:
