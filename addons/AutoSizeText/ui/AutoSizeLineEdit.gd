@@ -21,7 +21,7 @@ extends LineEdit
 		if is_node_ready():
 			_on_change_rect()
 
-func _set(property: StringName, value: Variant) -> bool:
+func _set(property: StringName, _value: Variant) -> bool:
 	if property == &"text" or \
 	property == &"right_icon" or \
 	property == &"clear_button_enabled" or \
@@ -62,7 +62,6 @@ func _on_change_rect() -> void:
 			right_icon_size += (_clear as Texture2D).get_size().x
 	#endregion
 
-	fsize = Vector2.ZERO
 	fsize = (font.get_string_size(current_text, alignment, -1, c_size , TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL))
 	fsize.x += right_icon_size
 
@@ -72,7 +71,6 @@ func _on_change_rect() -> void:
 
 		if c_size < min_size:break
 
-		fsize = Vector2.ZERO
 		fsize = (font.get_string_size(current_text, alignment, -1, c_size , TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL))
 		fsize.x += right_icon_size
 		offset = (font.get_string_size(OFFSET_BY, alignment, -1, c_size, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL)).x
