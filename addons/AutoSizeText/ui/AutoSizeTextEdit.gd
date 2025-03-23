@@ -72,7 +72,8 @@ func _validate_property(property: Dictionary) -> void:
 
 		
 func _split_txt() -> void:
-	if _text.is_empty():return
+	if _text.is_empty():
+		return
 
 	var offset: float = 0.0
 	var txt: PackedStringArray = _text.split('\n', true, 0)
