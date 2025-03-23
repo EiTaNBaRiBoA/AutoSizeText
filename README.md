@@ -13,16 +13,25 @@ Just use the provided UI elements in your project.
 ## Implemented
 * Label
 * RichTextLabel
+* TextEdit
+* LineEdit
 
 ## TODO
 
 ### Controls
-* TextEdit
-* LineEdit
+* CheckButton
+* CheckBox
+* MenuButton
+* OptionButton
 
 ### Features
 * Step-Size based on theme
 * Auto-Size numbers based on theme
+
+## Contribute
+Please try to adhere to the GDScript style guidelines https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html.  
+States that are considered "stable" enough will get a git-tag and be released to the Godot Asset Library.  
+In the future I'd like merge requests and development on the development branch, but since it's currently "moving fast" I don't care so much (yet).  
 
 ## OTHER
 Godot Asset Library: https://godotengine.org/asset-library/asset/3843  
