@@ -7,14 +7,18 @@ Intentionally made in GDScript to provide maximum compatibility (even in some of
 Just use the provided UI elements in your project.  
 
 ## Features
-* Auto-Size: Change Font-Size between two numbers
-* Step-Size: Change Font-Size based on pre-defined numbers
+* Font Auto Size: Change Font-Size between two numbers
+* Font Step Size: Change Font-Size based on pre-defined numbers
 
 ## Implemented
 * Label
 * RichTextLabel
+
+### WIP
 * TextEdit
+  * Font Step Size
 * LineEdit
+  * Font Step Size
 
 ## TODO
 
