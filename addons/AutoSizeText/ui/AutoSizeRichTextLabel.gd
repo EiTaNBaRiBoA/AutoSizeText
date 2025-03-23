@@ -4,8 +4,8 @@
 #
 # Following the context of the main AutoSize addon.
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
-extends RichTextLabel
 class_name AutoSizeRichTextLabel
+extends RichTextLabel
 
 ## watch_text_change true is needed for this event to work
 signal text_changed(old_text: String, new_text: String)
@@ -18,54 +18,53 @@ var watch_text_change: bool = false
 @export_tool_button("FORCE REFRESH")
 var refresh_button: Callable = do_resize_text
 
-@export_group("Auto-Size")
+@export_group("Auto Font Size")
 
-var _min_font_size: int = 8
+## Min text size to reach
 @export_range(1, 512, 1.0)
-var min_font_size: int = _min_font_size:
+var min_font_size: int = 8:
 	get:
-		return _min_font_size
+		return min_font_size
 	set(value):
-		_min_font_size = value
-		if _min_font_size >= max_font_size:
-			_min_font_size = max_font_size - 1
+		min_font_size = value
+		if min_font_size >= max_font_size:
+			min_font_size = max_font_size - 1
 			push_warning(
 				"min_font_size {0} >= max_font_size {1}, fixed to {2}"
-				.format([value, max_font_size, _min_font_size])
+				.format([value, max_font_size, min_font_size])
 			)
 
 		notify_property_list_changed()
 		resize_text()
 
-var _max_font_size: int = 38
+## Max text size to reach
 @export_range(1, 512, 1.0)
-var max_font_size: int = _max_font_size:
+var max_font_size: int = 38:
 	get:
-		return _max_font_size
+		return max_font_size
 	set(value):
-		_max_font_size = value
-		if _max_font_size <= min_font_size:
-			_max_font_size = min_font_size + 1
+		max_font_size = value
+		if max_font_size <= min_font_size:
+			max_font_size = min_font_size + 1
 			push_warning(
 				"max_font_size {0} <= min_font_size {1}, fixed to {2}"
-				.format([value, min_font_size, _max_font_size])
+				.format([value, min_font_size, max_font_size])
 			)
 
 		notify_property_list_changed()
 		resize_text()
 
-@export_group("Step Size")
+@export_group("Font Step Size")
 
-var _step_sizes: Array[int] = []
 ## Needs 2 numbers to work / will be automatically prefered over "Auto-Size"[br]
 ## when 2 numbers or more are present.
 @export
-var step_sizes: Array[int] = _step_sizes:
+var step_sizes: Array[int] = []:
 	get:
-		return _step_sizes
+		return step_sizes
 	set(value):
-		_step_sizes = value
-		_step_sizes.sort()
+		step_sizes = value
+		step_sizes.sort()
 		
 		notify_property_list_changed()
 		resize_text()
@@ -85,7 +84,7 @@ func _ready() -> void:
 	do_resize_text()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if watch_text_change:
 		if text != _last_text:
 			do_resize_text()
