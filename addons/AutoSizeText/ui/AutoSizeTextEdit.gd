@@ -175,7 +175,7 @@ func _ready() -> void:
 
 	_force_update.call_deferred()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	resize_text()
 	set_process(false)
 
@@ -215,10 +215,10 @@ func resize_text() -> void:
 
 	var txt: PackedStringArray = current_text.split('\n', true, 0)
 	for character: String in txt:
-		var size_offset: Vector2 = font.get_string_size(character, HORIZONTAL_ALIGNMENT_LEFT, -1, offset, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL)
+		var size_offset: Vector2 = font.get_string_size(character, HORIZONTAL_ALIGNMENT_LEFT, -1, int(offset), TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL)
 		font_size_x = maxf(font_size_x, size_offset.x)
 
-	offset = size.x - font.get_string_size(OFFSET_BY, HORIZONTAL_ALIGNMENT_LEFT, -1, offset, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL).x
+	offset = size.x - font.get_string_size(OFFSET_BY, HORIZONTAL_ALIGNMENT_LEFT, -1, int(offset), TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL).x
 
 	if use_placeholder:
 		# HACK: Lines updated response by text only

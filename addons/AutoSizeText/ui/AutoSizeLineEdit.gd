@@ -59,7 +59,6 @@ var step_sizes: Array[int] = []:
 
 
 var _processing_flag: bool = false
-var _setup_flag : bool = false
 
 func _set(property: StringName, _value: Variant) -> bool:
 	if (
@@ -88,7 +87,7 @@ func _ready() -> void:
 func update() -> void:
 	set_process(true)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	resize_text()
 	set_process(false)
 
