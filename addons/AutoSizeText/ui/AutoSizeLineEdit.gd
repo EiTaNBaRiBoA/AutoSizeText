@@ -73,7 +73,7 @@ func _set(property: StringName, _value: Variant) -> bool:
 	return false
 
 func _ready() -> void:
-	item_rect_changed.connect(resize_text)
+	item_rect_changed.connect(update)
 
 	#Process custom themes on focus
 	if use_focus_theme:
@@ -81,8 +81,6 @@ func _ready() -> void:
 			focus_entered.connect(update)
 		if !focus_exited.is_connected(update):
 			focus_exited.connect(update)
-
-	resize_text.call_deferred()
 
 func update() -> void:
 	set_process(true)
