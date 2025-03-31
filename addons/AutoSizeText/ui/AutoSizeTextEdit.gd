@@ -94,7 +94,7 @@ func get_auto_size_text() -> String:
 
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "text":
+	if property.name == &"text":
 		property.usage = PROPERTY_USAGE_NONE
 
 
@@ -157,6 +157,10 @@ func _set(property: StringName, _value: Variant) -> bool:
 	return false
 
 func _ready() -> void:
+	if _text.is_empty() and !text.is_empty():
+		#Onload handle transition from native TextEdit to AutoSizeTextEdit
+		_text = text
+
 	item_rect_changed.connect(update)
 
 	#Process custom themes on focus

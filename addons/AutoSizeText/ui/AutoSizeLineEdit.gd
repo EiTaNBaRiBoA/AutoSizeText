@@ -11,6 +11,13 @@ extends LineEdit
 var refresh_button: Callable = resize_text
 
 @export_group("Auto Font Size")
+@export var _text : String:
+	set(new_text):
+		_text = new_text
+		if alignment == HORIZONTAL_ALIGNMENT_FILL and !_text.is_empty():
+			text = _text + " " #HACK: https://github.com/SpielmannSpiel/AutoSizeText/issues/3
+			return
+		text = _text
 
 ## Min text size to reach
 @export_range(1, 512)
@@ -73,6 +80,10 @@ func _set(property: StringName, _value: Variant) -> bool:
 	return false
 
 func _ready() -> void:
+	if _text.is_empty() and !text.is_empty():
+		#Onload handle transition from native LineEdit to AutoSizeLineEdit
+		_text = text
+
 	item_rect_changed.connect(update)
 
 	#Process custom themes on focus
@@ -81,6 +92,10 @@ func _ready() -> void:
 			focus_entered.connect(update)
 		if !focus_exited.is_connected(update):
 			focus_exited.connect(update)
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == &"text":
+		property.usage = PROPERTY_USAGE_NONE
 
 func update() -> void:
 	set_process(true)
