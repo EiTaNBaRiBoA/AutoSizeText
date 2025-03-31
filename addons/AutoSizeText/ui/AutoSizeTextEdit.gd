@@ -49,6 +49,7 @@ var refresh_button: Callable = resize_text
 		if is_node_ready():
 			resize_text()
 
+## Enable this if you have a focus theme with an overriding border margin modifier.
 @export var use_focus_theme : bool = false:
 	set(use_focus):
 		use_focus_theme = use_focus
