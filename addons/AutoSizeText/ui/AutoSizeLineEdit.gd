@@ -154,18 +154,28 @@ func resize_text() -> void:
 	var rect_size : float = get_rect().size.x
 	var current_theme : StyleBox = null
 
-	if has_focus():
-		current_theme = get(&"theme_override_styles/focus")
-		if current_theme == null:
-			current_theme = get_theme_stylebox(&"focus")
-	elif !editable:
-		current_theme = get(&"theme_override_styles/read_only")
-		if current_theme == null:
-			current_theme = get_theme_stylebox(&"read_only")
+	if use_focus_theme:
+		if has_focus():
+			current_theme = get(&"theme_override_styles/focus")
+			if current_theme == null:
+				current_theme = get_theme_stylebox(&"focus")
+		elif !editable:
+			current_theme = get(&"theme_override_styles/read_only")
+			if current_theme == null:
+				current_theme = get_theme_stylebox(&"read_only")
+		else:
+			current_theme = get(&"theme_override_styles/normal")
+			if current_theme == null:
+				current_theme = get_theme_stylebox(&"normal")
 	else:
-		current_theme = get(&"theme_override_styles/normal")
-		if current_theme == null:
-			current_theme = get_theme_stylebox(&"normal")
+		if !editable:
+			current_theme = get(&"theme_override_styles/read_only")
+			if current_theme == null:
+				current_theme = get_theme_stylebox(&"read_only")
+		else:
+			current_theme = get(&"theme_override_styles/normal")
+			if current_theme == null:
+				current_theme = get_theme_stylebox(&"normal")
 
 	if current_theme is StyleBoxFlat:
 		rect_size -= current_theme.border_width_left
