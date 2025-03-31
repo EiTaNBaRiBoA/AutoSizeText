@@ -11,6 +11,9 @@ extends LineEdit
 var refresh_button: Callable = resize_text
 
 @export_group("Auto Font Size")
+## String value of the LineEdit.
+##[br][br]
+## Note: Changing text using this property won't emit the text_changed signal.
 @export var _text : String:
 	set(new_text):
 		_text = new_text
