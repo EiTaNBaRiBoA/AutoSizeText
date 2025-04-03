@@ -7,11 +7,15 @@
 class_name AutoSizeTextEdit
 extends TextEdit
 
+# Taking custom _char offset prevent text clip by rect
+const OFFSET_BY: String = "_"
+
 @export_tool_button("FORCE REFRESH")
 var refresh_button: Callable = resize_text
 
 ## String value of the TextEdit.
-@export_multiline var _text: String = "":
+@export_multiline
+var _text: String = "":
 	set(txt):
 		_text = txt
 		if auto_split_text:
@@ -20,14 +24,16 @@ var refresh_button: Callable = resize_text
 			set(&"text", _text)
 
 ## Enable auto size text function.
-@export var enable_auto_resize: bool = true:
+@export
+var enable_auto_resize: bool = true:
 	set(value):
 		enable_auto_resize = value
 		if is_node_ready():
 			set_deferred(&"_text", _text)
 
 ## This cut allows you to cut the string if the width limit is exceeded and works if the minimum size is reached.
-@export var auto_split_text: bool = false:
+@export
+var auto_split_text: bool = false:
 	set(value):
 		auto_split_text = value
 		if is_node_ready():
@@ -36,23 +42,27 @@ var refresh_button: Callable = resize_text
 @export_group("Auto Font Size")
 
 ## Min text size to reach
-@export_range(1, 512) var min_size: int = 8:
+@export_range(1, 512)
+var min_size: int = 8:
 	set(new_min):
 		min_size = min(max(1, new_min), max_size)
 		if is_node_ready():
 			resize_text()
 
 ## Max text size to reach
-@export_range(1, 512) var max_size: int = 38:
+@export_range(1, 512)
+var max_size: int = 38:
 	set(new_max):
 		max_size = max(min_size, min(new_max, 512))
 		if is_node_ready():
 			resize_text()
 
 ## Enable this if you have a focus theme with an overriding border margin modifier.
-@export var use_focus_theme : bool = false:
+@export
+var use_focus_theme: bool = false:
 	set(use_focus):
 		use_focus_theme = use_focus
+		
 		if use_focus:
 			if !focus_entered.is_connected(update):
 				focus_entered.connect(update)
@@ -79,8 +89,7 @@ var step_sizes: Array[int] = []:
 		notify_property_list_changed()
 		resize_text()
 
-# Taking custom _char offset prevent text clip by rect
-const OFFSET_BY: String = "_"
+
 var _processing_flag: bool = false
 
 
@@ -110,12 +119,19 @@ func _split_txt() -> void:
 	if character_size < 2 and character_size != min_size:
 		character_size = max(min_size, min(16, max_size))
 
-
 	var font: Font = get(&"theme_override_fonts/font")
 	if null == font:
 		font = get_theme_default_font()
 
-	offset = size.x - font.get_string_size(OFFSET_BY, HORIZONTAL_ALIGNMENT_LEFT, -1, character_size, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL).x
+	offset = size.x - font.get_string_size(
+		OFFSET_BY,
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		character_size,
+		TextServer.JUSTIFICATION_NONE,
+		TextServer.DIRECTION_AUTO,
+		TextServer.ORIENTATION_HORIZONTAL
+	).x
 
 	var new_text: String = ""
 	for character: String in txt:
@@ -136,7 +152,15 @@ func _split_txt() -> void:
 					current_character = ""
 					continue
 
-				size_offset = font.get_string_size(current_character + "- " + _char , HORIZONTAL_ALIGNMENT_LEFT, -1, character_size, TextServer.JUSTIFICATION_NONE,TextServer.DIRECTION_AUTO,TextServer.ORIENTATION_HORIZONTAL)
+				size_offset = font.get_string_size(
+					current_character + "- " + _char,
+					HORIZONTAL_ALIGNMENT_LEFT,
+					-1,
+					character_size,
+					TextServer.JUSTIFICATION_NONE,
+					TextServer.DIRECTION_AUTO,
+					TextServer.ORIENTATION_HORIZONTAL
+				)
 
 				if offset < size_offset.x:
 					final += current_character + "- " + "\n" + _char
@@ -157,14 +181,15 @@ func _set(property: StringName, _value: Variant) -> bool:
 
 	return false
 
+
 func _ready() -> void:
 	if _text.is_empty() and !text.is_empty():
-		#Onload handle transition from native TextEdit to AutoSizeTextEdit
+		# Onload handle transition from native TextEdit to AutoSizeTextEdit
 		_text = text
 
 	item_rect_changed.connect(update)
 
-	#Process custom themes on focus
+	# Process custom themes on focus
 	if use_focus_theme:
 		if !focus_entered.is_connected(update):
 			focus_entered.connect(update)
@@ -191,7 +216,7 @@ func resize_text() -> void:
 		return
 
 	var font: Font = get(&"theme_override_fonts/font")
-	var iterator : Array = get_iterator()
+	var iterator: Array = get_iterator()
 	var font_size_x: float = 0.0
 	var offset: float = iterator[0]
 
@@ -223,8 +248,8 @@ func resize_text() -> void:
 		# HACK: Lines updated response by text only
 		text = placeholder_text
 
-	var margin : float = 0.0
-	var current_theme : StyleBox = null
+	var margin: float = 0.0
+	var current_theme: StyleBox = null
 
 	if use_focus_theme:
 		if has_focus():
@@ -263,7 +288,7 @@ func resize_text() -> void:
 
 	offset -= margin
 
-	for font_size_iterator : int in iterator:
+	for font_size_iterator: int in iterator:
 		# Refresh rect
 		set(&"theme_override_font_sizes/font_size", font_size_iterator)
 
@@ -283,7 +308,7 @@ func resize_text() -> void:
 
 	set_deferred(&"_processing_flag", false)
 
-func needs_resize(font_size : float) -> bool:
+func needs_resize(font_size: float) -> bool:
 	return font_size or get_line_count() > get_visible_line_count()
 
 func get_iterator() -> Array:

@@ -69,7 +69,7 @@ var step_sizes: Array[int] = []:
 		notify_property_list_changed()
 		resize_text()
 
-var _processing_flag : bool = false
+var _processing_flag: bool = false
 var _last_text: String = ""
 
 

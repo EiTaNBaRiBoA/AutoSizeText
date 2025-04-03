@@ -14,11 +14,13 @@ var refresh_button: Callable = resize_text
 ## String value of the LineEdit.
 ##[br][br]
 ## Note: Changing text using this property won't emit the text_changed signal.
-@export var _text : String:
+@export
+var _text : String:
 	set(new_text):
 		_text = new_text
 		if alignment == HORIZONTAL_ALIGNMENT_FILL and !_text.is_empty():
-			text = _text + " " #HACK: https://github.com/SpielmannSpiel/AutoSizeText/issues/3
+			# HACK: https://github.com/SpielmannSpiel/AutoSizeText/issues/3
+			text = _text + " "
 			return
 		text = _text
 
@@ -39,9 +41,11 @@ var max_size: int = 38:
 			resize_text()
 
 ## Enable this if you have a focus theme with an overriding border margin modifier.
-@export var use_focus_theme : bool = false:
+@export
+var use_focus_theme : bool = false:
 	set(use_focus):
 		use_focus_theme = use_focus
+		
 		if use_focus:
 			if !focus_entered.is_connected(update):
 				focus_entered.connect(update)
@@ -71,6 +75,7 @@ var step_sizes: Array[int] = []:
 
 var _processing_flag: bool = false
 
+
 func _set(property: StringName, _value: Variant) -> bool:
 	if (
 		property == &"text"
@@ -83,30 +88,35 @@ func _set(property: StringName, _value: Variant) -> bool:
 
 	return false
 
+
 func _ready() -> void:
 	if _text.is_empty() and !text.is_empty():
-		#Onload handle transition from native LineEdit to AutoSizeLineEdit
+		# Onload handle transition from native LineEdit to AutoSizeLineEdit
 		_text = text
 
 	item_rect_changed.connect(update)
 
-	#Process custom themes on focus
+	# Process custom themes on focus
 	if use_focus_theme:
 		if !focus_entered.is_connected(update):
 			focus_entered.connect(update)
 		if !focus_exited.is_connected(update):
 			focus_exited.connect(update)
 
+
 func _validate_property(property: Dictionary) -> void:
 	if property.name == &"text":
 		property.usage = PROPERTY_USAGE_NONE
 
+
 func update() -> void:
 	set_process(true)
+
 
 func _process(_delta: float) -> void:
 	resize_text()
 	set_process(false)
+
 
 func resize_text() -> void:
 	if _processing_flag:
@@ -203,7 +213,7 @@ func resize_text() -> void:
 		)
 		font_size.x += right_icon_size
 
-		offset = (font.get_string_size(
+		offset = font.get_string_size(
 			OFFSET_BY,
 			alignment,
 			-1,
@@ -211,15 +221,17 @@ func resize_text() -> void:
 			TextServer.JUSTIFICATION_NONE,
 			TextServer.DIRECTION_AUTO,
 			TextServer.ORIENTATION_HORIZONTAL
-		)).x
+		).x
 
 		if not needs_resize(rect_size - offset, font_size.x):
 			break
 
 	set_deferred(&"_processing_flag", false)
 
+
 func needs_resize(rect_size : float, font_size : float) -> bool:
 	return rect_size < font_size
+
 
 func get_iterator() -> Array:
 	if len(step_sizes) >= 2:
