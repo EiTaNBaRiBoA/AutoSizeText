@@ -18,6 +18,7 @@ Just use the provided UI elements in your project.
 
 ### WIP
 * Button
+  * Extremely tiny text visible in editor
 
 ## TODO
 
