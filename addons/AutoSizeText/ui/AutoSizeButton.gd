@@ -138,13 +138,16 @@ func _prepare_colors():
 	for color_name in colors_to_disable:
 		# TODO: get_theme_color always returns (0, 0, 0, 0), WHY?
 		_saved_theme_colors[color_name] = get_theme_color(color_name, "Button")
-		print(_saved_theme_colors[color_name])
-		set("theme_override_colors/" + color_name, Color(0, 0, 0, 0))
+		#print(_saved_theme_colors[color_name])
+		
+		# theme-overriding in editor will save the changes and break on scene reload
+		if not Engine.is_editor_hint():
+			set("theme_override_colors/" + color_name, Color(0, 0, 0, 0))
 
 	
 func _sync_color(color_type: String) -> void:
 	var theme_color: Color = _saved_theme_colors[color_type] #get_theme_color(color_type, "Button")
-	#_label.set(&"theme_override_colors/font_color", theme_color)
+	_label.set(&"theme_override_colors/font_color", theme_color)
 
 
 func _process(_delta: float) -> void:

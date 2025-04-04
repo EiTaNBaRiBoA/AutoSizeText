@@ -13,12 +13,11 @@ Just use the provided UI elements in your project.
 ## Implemented
 * Label
 * RichTextLabel
+* TextEdit
+* LineEdit
 
 ### WIP
-* TextEdit
-  * Font Step Size
-* LineEdit
-  * Font Step Size
+* Button
 
 ## TODO
 
@@ -31,6 +30,14 @@ Just use the provided UI elements in your project.
 ### Features
 * Step-Size based on theme
 * Auto-Size numbers based on theme
+
+## Know Issues
+Overriding existing variables when inheriting doesnt work, see:  
+
+* https://github.com/godotengine/godot-proposals/issues/7593
+* https://github.com/godotengine/godot-proposals/issues/338
+
+therefore some hacks and workarounds are needed.
 
 ## Contribute
 Please try to adhere to the GDScript style guidelines https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html.  
