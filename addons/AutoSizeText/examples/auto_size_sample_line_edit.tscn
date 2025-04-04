@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq8cjcrgopd4m"]
 
-[ext_resource type="Texture2D" uid="uid://c328ix3nrjgdy" path="res://icon.svg" id="2_guepu"]
+[ext_resource type="Texture2D" uid="uid://3xe3jq5e0cx1" path="res://addons/AutoSizeText/images/godot_icon.svg" id="2_ximif"]
 [ext_resource type="Script" uid="uid://cs3okxqop883t" path="res://addons/AutoSizeText/ui/AutoSizeLineEdit.gd" id="2_ykgak"]
 
 [node name="Samples" type="Control"]
@@ -66,6 +66,6 @@ theme_override_font_sizes/font_size = 16
 placeholder_text = "As PlaceHolder: Lorem Ipsum\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\""
 alignment = 1
 clear_button_enabled = true
-right_icon = ExtResource("2_guepu")
+right_icon = ExtResource("2_ximif")
 script = ExtResource("2_ykgak")
 min_size = 1
