@@ -11,7 +11,7 @@ signal text_changed(old_text: String, new_text: String)
 var watch_text_change: bool = true
 
 @export_tool_button("FORCE REFRESH")
-var refresh_button: Callable = _update_label()
+var refresh_button: Callable = _update_label
 
 @export_group("Auto Font Size")
 
@@ -92,9 +92,11 @@ func _ready() -> void:
 	
 	if _label == null:
 		_label = AutoSizeLabel.new()
+		_label._force_default_settings()
+		add_child(_label)
+		_label.size = size 
 		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		add_child(_label)
 		_label.set_anchors_preset(PRESET_FULL_RECT)
 		
 	_sync_label()	
@@ -104,16 +106,23 @@ func _ready() -> void:
 	#do_resize_text()
 
 
-func _sync_label():
+func _sync_label() -> void:
+	if _label == null:
+		return
+		
 	_label.min_font_size = min_font_size
 	_label.max_font_size = max_font_size
 	_label.step_sizes = step_sizes
 
 
-func _update_label():
+func _update_label() -> void:
+	if _label == null:
+		return
+		
 	_label.text = text
 	# TODO: detect current button state to pass on the color
 	_sync_color("font_color")
+	_label.do_resize_text()
 	
 
 func _prepare_colors():
@@ -122,17 +131,20 @@ func _prepare_colors():
 		"font_disabled_color",
 		"font_hover_pressed_color",
 		"font_hover_color",
+	 	"font_focus_color",
+		"font_pressed_color",
 	]
 	
 	for color_name in colors_to_disable:
+		# TODO: get_theme_color always returns (0, 0, 0, 0), WHY?
 		_saved_theme_colors[color_name] = get_theme_color(color_name, "Button")
+		print(_saved_theme_colors[color_name])
 		set("theme_override_colors/" + color_name, Color(0, 0, 0, 0))
 
-
+	
 func _sync_color(color_type: String) -> void:
 	var theme_color: Color = _saved_theme_colors[color_type] #get_theme_color(color_type, "Button")
-	print(theme_color)
-	_label.set(&"theme_override_colors/font_color", theme_color)
+	#_label.set(&"theme_override_colors/font_color", theme_color)
 
 
 func _process(_delta: float) -> void:

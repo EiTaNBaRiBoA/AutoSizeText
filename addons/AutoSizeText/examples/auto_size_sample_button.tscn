@@ -35,6 +35,7 @@ script = ExtResource("2_jc6be")
 metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
 [node name="AutoSizeLabel" type="Label" parent="pnlDevelopmentTesting"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 128.0
 offset_right = 128.0
@@ -48,6 +49,7 @@ script = ExtResource("2_jc6be")
 metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
 [node name="Button" type="Button" parent="pnlDevelopmentTesting"]
+layout_mode = 0
 offset_left = 192.0
 offset_top = 128.0
 offset_right = 320.0
@@ -56,6 +58,7 @@ text = "I am  a Button"
 clip_text = true
 
 [node name="TextureButton" type="TextureButton" parent="pnlDevelopmentTesting"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 256.0
 offset_right = 192.0
@@ -80,6 +83,7 @@ watch_text_change = true
 metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
 [node name="Button2" type="Button" parent="pnlDevelopmentTesting"]
+layout_mode = 0
 offset_left = 384.0
 offset_top = 128.0
 offset_right = 512.0
@@ -105,6 +109,7 @@ script = ExtResource("2_jc6be")
 metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
 [node name="Button3" type="Button" parent="pnlDevelopmentTesting"]
+layout_mode = 0
 offset_left = 384.0
 offset_top = 256.0
 offset_right = 512.0
@@ -131,12 +136,16 @@ metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
 [node name="AutoSizeButton" type="Button" parent="."]
 layout_mode = 0
-offset_right = 264.0
-offset_bottom = 144.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 128.0
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 0)
 theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 1
 text = "I am  a Button and a label Label"
 clip_text = true
