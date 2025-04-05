@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq8cjcrgopd4m"]
 
-[ext_resource type="Texture2D" uid="uid://b0fv1r18362nk" path="res://addons/AutoSizeText/images/AutoSizeText.svg" id="2_ximif"]
+[ext_resource type="Texture2D" uid="uid://3xe3jq5e0cx1" path="res://addons/AutoSizeText/images/godot_icon.svg" id="2_ximif"]
 [ext_resource type="Script" uid="uid://cs3okxqop883t" path="res://addons/AutoSizeText/ui/AutoSizeLineEdit.gd" id="2_ykgak"]
 
 [node name="Samples" type="Control"]
