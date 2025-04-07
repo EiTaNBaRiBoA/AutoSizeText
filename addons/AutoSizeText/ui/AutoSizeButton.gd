@@ -103,7 +103,7 @@ func _ready() -> void:
 		_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_label.set_anchors_preset(PRESET_FULL_RECT)
 		
-	_sync_label()	
+	_sync_label()
 	_update_label()
 	#draw.connect(resize_text)
 	#resized.connect(do_resize_text)
