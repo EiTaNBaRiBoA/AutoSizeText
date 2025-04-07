@@ -96,11 +96,9 @@ func _ready() -> void:
 		_label = AutoSizeLabel.new()
 		_label.force_default_settings()
 		add_child(_label)
-		
 		_label.size = Vector2(size.x - _get_biggest_check_icon_size().x - _get_icon_space(), size.y)
 		_label.horizontal_alignment = alignment
 		_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		#anchor_control_to_size_right(_label, size)
 		_label.set_anchors_preset(PRESET_FULL_RECT)
 		
 	_sync_label()
@@ -119,9 +117,6 @@ func _sync_label() -> void:
 func _update_label() -> void:
 	if _label == null:
 		return
-	
-	print(icon)
-	#print(icon.get_size())
 	
 	_label.text = button_text
 	# TODO: detect current button state to pass on the color
@@ -160,7 +155,7 @@ func _sync_color(color_type: String) -> void:
 
 
 func _get_biggest_check_icon_size() -> Vector2:
-	var icons_to_check: Array[String] = [
+	const icons_to_check: Array[String] = [
 		"icon",
 		"checked",
 		"unchecked",
@@ -189,36 +184,16 @@ func _get_biggest_check_icon_size() -> Vector2:
 
 		if theme_icon.get_size().x > biggest_size.x:
 			biggest_size = theme_icon.get_size()
-
-	print(biggest_size)
 	
 	return biggest_size
 
 
 func _get_icon_space() -> int:
 	var margin: int = 0
-	var separation = get_theme_constant("h_separation", "CheckButton")
-	margin = separation
-	print("Horizontal separation: ", separation)
+	margin = get_theme_constant("h_separation", "CheckButton")
+	
 	var stylebox = get_theme_stylebox("normal", "CheckButton")
-	print("Padding left: ", stylebox.get_margin(SIDE_LEFT))
 	margin += stylebox.get_margin(SIDE_LEFT)
 	margin += stylebox.get_margin(SIDE_RIGHT)
 	
 	return margin
-
-
-func anchor_control_to_size_right(control: Control, parent_size: Vector2) -> void:
-	# Calculate normalized right anchor based on control's current width
-	var width = control.size.x
-	var right_anchor = width / parent_size.x
-
-	control.set_anchor(SIDE_LEFT, 0.0)
-	control.set_anchor(SIDE_RIGHT, right_anchor)
-	control.set_anchor(SIDE_TOP, 0.0)
-	control.set_anchor(SIDE_BOTTOM, 1.0)
-
-	control.set_margin(SIDE_LEFT, 0)
-	control.set_margin(SIDE_RIGHT, 0)
-	control.set_margin(SIDE_TOP, 0)
-	control.set_margin(SIDE_BOTTOM, 0)
