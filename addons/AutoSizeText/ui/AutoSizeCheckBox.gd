@@ -94,7 +94,7 @@ func _ready() -> void:
 	
 	if _label == null:
 		var margin: int = _get_biggest_check_icon_size().x + _get_icon_space()
-		print(margin)
+
 		_label = AutoSizeLabel.new()
 		_label.force_default_settings()
 		add_child(_label)
