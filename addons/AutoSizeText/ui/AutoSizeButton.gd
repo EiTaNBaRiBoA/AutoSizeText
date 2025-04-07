@@ -2,7 +2,6 @@
 class_name AutoSizeButton
 extends Button
 
-## watch_text_change true is needed for this event to work
 signal text_changed(old_text: String, new_text: String)
 
 ## Since it is not possible to override existing variables in gdscript,
