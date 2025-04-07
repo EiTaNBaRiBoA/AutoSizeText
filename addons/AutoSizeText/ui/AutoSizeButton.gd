@@ -94,10 +94,11 @@ func _ready() -> void:
 	clip_text = true
 	
 	if _label == null:
+		#print("CREATE LABEL FOR: " + name)
 		_label = AutoSizeLabel.new()
-		_label._force_default_settings()
+		_label.force_default_settings()
 		add_child(_label)
-		_label.size = size 
+		_label.size = size
 		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_label.set_anchors_preset(PRESET_FULL_RECT)

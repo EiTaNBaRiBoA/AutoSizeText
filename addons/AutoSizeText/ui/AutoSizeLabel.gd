@@ -71,7 +71,7 @@ var _last_text: String = ""
 
 func _ready() -> void:
 	# TODO: change defaults instead of hard-setting!
-	_force_default_settings()
+	force_default_settings()
 
 	draw.connect(resize_text)
 	resized.connect(do_resize_text)
@@ -89,14 +89,14 @@ func _process(_delta: float) -> void:
 			_last_text = text
 
 
-func _force_default_settings() -> void:
+func force_default_settings() -> void:
 	if autowrap_mode == TextServer.AUTOWRAP_OFF:
 		autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		push_warning("changed autowrap_mode to " + str(autowrap_mode))
+		#push_warning("changed autowrap_mode to " + str(autowrap_mode))
 
 	if text_overrun_behavior == TextServer.AUTOWRAP_OFF:
 		text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		push_warning("changed text_overrun_behavior to " + str(text_overrun_behavior))
+		#push_warning("changed text_overrun_behavior to " + str(text_overrun_behavior))
 
 	clip_text = true
 

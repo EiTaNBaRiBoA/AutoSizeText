@@ -178,6 +178,7 @@ step_sizes = Array[int]([8, 20])
 metadata/_custom_type_script = "uid://bnaosc552evuy"
 
 [node name="AutoSizeButtonDisabled" type="Button" parent="."]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 256.0
 offset_right = 192.0

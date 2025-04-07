@@ -11,20 +11,19 @@ Just use the provided UI elements in your project.
 * Font Step Size: Change Font-Size based on pre-defined numbers
 
 ## Implemented
+* Button
 * Label
 * RichTextLabel
 * TextEdit
 * LineEdit
 
 ### WIP
-* Button
-  * Extremely tiny text visible in editor
+* CheckButton
+* CheckBox
 
 ## TODO
 
 ### Controls
-* CheckButton
-* CheckBox
 * MenuButton
 * OptionButton
 
