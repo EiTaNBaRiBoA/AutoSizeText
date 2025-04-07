@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://mms01s6onpx7"]
+[gd_scene load_steps=4 format=3 uid="uid://mms01s6onpx7"]
 
 [ext_resource type="Script" uid="uid://bnaosc552evuy" path="res://addons/AutoSizeText/ui/AutoSizeButton.gd" id="1_7ogt3"]
+[ext_resource type="Script" uid="uid://leehmvr1x5lu" path="res://addons/AutoSizeText/ui/AutoSizeRichTextLabel.gd" id="2_1cvkl"]
 [ext_resource type="Script" uid="uid://d11kfgsd6jgt" path="res://addons/AutoSizeText/ui/AutoSizeLabel.gd" id="2_jc6be"]
 
 [node name="Control" type="Control"]
@@ -134,27 +135,56 @@ text_overrun_behavior = 3
 script = ExtResource("2_jc6be")
 metadata/_custom_type_script = "uid://d11kfgsd6jgt"
 
+[node name="info" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_font_sizes/bold_italics_font_size = 38
+theme_override_font_sizes/italics_font_size = 38
+theme_override_font_sizes/mono_font_size = 38
+theme_override_font_sizes/normal_font_size = 38
+theme_override_font_sizes/bold_font_size = 38
+bbcode_enabled = true
+text = "[fade start=20 length=50]Just change the size of these Buttons and see how they work.[/fade]"
+script = ExtResource("2_1cvkl")
+metadata/_custom_type_script = "uid://leehmvr1x5lu"
+
 [node name="AutoSizeButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 64.0
-offset_top = 64.0
-offset_right = 256.0
-offset_bottom = 128.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
 theme_override_font_sizes/font_size = 1
-text = "I am  a Button and a label"
 clip_text = true
 script = ExtResource("1_7ogt3")
+button_text = "I am a Button and a label by default"
 metadata/_custom_type_script = "uid://bnaosc552evuy"
 
 [node name="AutoSizeButtonStepSize" type="Button" parent="."]
 layout_mode = 0
-offset_left = 320.0
-offset_top = 64.0
-offset_right = 448.0
-offset_bottom = 128.0
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 192.0
 theme_override_font_sizes/font_size = 1
-text = "I am  a Button and a label Step Size"
 clip_text = true
 script = ExtResource("1_7ogt3")
+button_text = "I am  a Button and a label by default with Step Size"
 step_sizes = Array[int]([8, 20])
+metadata/_custom_type_script = "uid://bnaosc552evuy"
+
+[node name="AutoSizeButtonDisabled" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 1
+disabled = true
+clip_text = true
+script = ExtResource("1_7ogt3")
+button_text = "I am a Button and a label by default disabled"
 metadata/_custom_type_script = "uid://bnaosc552evuy"

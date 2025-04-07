@@ -5,10 +5,21 @@ extends Button
 ## watch_text_change true is needed for this event to work
 signal text_changed(old_text: String, new_text: String)
 
-## When true, text-size will be re-calculated when the text is changed.[br]
-## Needed for the text_changed event to work.
-@export
-var watch_text_change: bool = true
+## Since it is not possible to override existing variables in gdscript,
+## this needs to be a dirty workaround
+@export_multiline
+var button_text: String = "":
+	get:
+		return button_text
+	set(value):
+		button_text = value
+		
+		notify_property_list_changed()
+		_sync_label()
+		_update_label()
+		
+		if not Engine.is_editor_hint() and _label != null:
+			text_changed.emit(_label.text, button_text)
 
 @export_tool_button("FORCE REFRESH")
 var refresh_button: Callable = _update_label
@@ -80,14 +91,6 @@ func _ready() -> void:
 	set(&"theme_override_font_sizes/font_size", 1)
 	_prepare_colors()
 
-	#if autowrap_mode == TextServer.AUTOWRAP_OFF:
-	#	autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	#	push_warning("changed autowrap_mode to " + str(autowrap_mode))
-
-	#if text_overrun_behavior == TextServer.AUTOWRAP_OFF:
-	#	text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	#	push_warning("changed text_overrun_behavior to " + str(text_overrun_behavior))
-
 	clip_text = true
 	
 	if _label == null:
@@ -119,10 +122,16 @@ func _update_label() -> void:
 	if _label == null:
 		return
 		
-	_label.text = text
+	_label.text = button_text
 	# TODO: detect current button state to pass on the color
 	_sync_color("font_color")
 	_label.do_resize_text()
+	
+	if Engine.is_editor_hint() and text != "":
+		push_warning(
+			"The AutoSizeButton '%s' has the text '%s'. Please set the text to 'button_text' instead of the text property."
+			 % [name, text]
+		)
 	
 
 func _prepare_colors():
@@ -148,14 +157,3 @@ func _prepare_colors():
 func _sync_color(color_type: String) -> void:
 	var theme_color: Color = _saved_theme_colors[color_type] #get_theme_color(color_type, "Button")
 	_label.set(&"theme_override_colors/font_color", theme_color)
-
-
-func _process(_delta: float) -> void:
-	if watch_text_change:
-		if text != _label.text:
-			_update_label()
-
-			if not Engine.is_editor_hint():
-				text_changed.emit(_label.text, text)
-
-			_label.text = text
