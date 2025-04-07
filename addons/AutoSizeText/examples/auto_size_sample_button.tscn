@@ -150,6 +150,7 @@ theme_override_font_sizes/bold_font_size = 38
 bbcode_enabled = true
 text = "[fade start=20 length=50]Just change the size of these Buttons and see how they work.[/fade]"
 script = ExtResource("2_1cvkl")
+watch_text_change = true
 metadata/_custom_type_script = "uid://leehmvr1x5lu"
 
 [node name="AutoSizeButton" type="Button" parent="."]
